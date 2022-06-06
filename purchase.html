@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Purchases</title>
+    <style>
+      body>h3:nth-child(1){
+        text-align: center;
+      }
+        #purchased_vouchers{
+       display:grid;
+       grid-template-columns:repeat(4,1fr);
+        gap: 10px;
+        
+      }
+      .voucher{
+       
+        text-align: center;
+      }
+      
+      .voucher>img{
+        width: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <h3 id="wallet_balance"></h3>
+
+
+
+    <div id="purchased_vouchers">
+       
+    </div>
+
+
+
+    <!-- Wallet balence id:- "wallet_balance" (only number). -->
+    <!-- - All the purchased voucher will be appended in div with id as "purchased_vouchers".
+  - The remaining balance will show on the page inside h3 tag with id as "balance" -->
+  </body>
+</html>
+
+<script>
+  var data=JSON.parse(localStorage.getItem("purchase"))
+
+  data.forEach(function(el,i){
+     let div=document.createElement("div")
+  div.setAttribute("class",'voucher')
+    
+  let img=document.createElement("img")
+  img.src=(el.image)
+
+  let name=document.createElement("p")
+  name.innerText=el.name;
+
+  let price=document.createElement("h4")
+  price.innerText=el.price;
+
+
+  div.append(img,name,price)
+
+
+  document.querySelector("#purchased_vouchers").append(div)
+  })
+
+
+var get=JSON.parse(localStorage.getItem("user"))
+console.log(get)
+var x = get.Wallet
+document.querySelector("#wallet_balance").innerText=x
+</script>
